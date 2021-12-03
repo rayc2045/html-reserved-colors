@@ -10,15 +10,26 @@
   
 header
   width: 95%
-  
-.title
-  font-size: 0.875rem
-  color: silver
-
-.description
-  margin: 0
-  font-size: 2.125rem
-  font-weight: 500
+  line-height: 26px
+  h1
+    font-size: 42px
+    font-weight: 500
+  p
+    margin: 0
+    font-size: 21px
+    letter-spacing: 0.5px
+    color: gray
+  +iPad
+    line-height: 43px
+    h1
+      margin: 0
+      font-size: 14px
+      letter-spacing: 1.6px
+      text-transform: uppercase
+      color: silver
+    p
+      font-size: 34px
+      color: $black
 
 .cards
   padding: 0
@@ -39,13 +50,12 @@ header
     +neumorphicShadow
     display: inline-block
   h1
-    opacity: 80%
     font-size: 1.75em
   .hex-section, .rgb-section
     margin-bottom: 1em
-    opacity: 80%
     font-size: 0.875em
   .title
     font-size: 0.875em
+    color: silver
   .hex-value, .rgb-value
     font-size: 1.25em
