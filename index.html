@@ -20,8 +20,8 @@
     @dragstart.prevent
   >
     <header>
-      <h1 class="title uppercase">COLOR NAMES</h1>
-      <p class="description">
+      <h1>Color Names</h1>
+      <p>
         Modern browsers support 140 named colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
@@ -35,6 +35,7 @@
         ></div>
         <h1
           class="pointer"
+          :style="`${color.name.length >= 17 ? 'font-size: 1.45em' : color.name.length >= 15 ? 'font-size: 1.6em': ''}`"
           @click="store.copyCode(color, 'name')"
         >
           {{ color.name }}

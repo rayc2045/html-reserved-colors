@@ -10,26 +10,30 @@
   
 header
   width: 95%
-  line-height: 26px
+  line-height: 1.625em
   h1
-    font-size: 42px
+    margin-top: 0.5em
+    font-size: 2.625em
     font-weight: 500
   p
     margin: 0
-    font-size: 21px
-    letter-spacing: 0.5px
+    font-size: 1.3125em
+    letter-spacing: 0.03125em
     color: gray
   +iPad
-    line-height: 43px
+    line-height: 2.6875rem
     h1
       margin: 0
-      font-size: 14px
-      letter-spacing: 1.6px
+      font-size: 0.875em
+      letter-spacing: 0.1em
       text-transform: uppercase
       color: silver
     p
-      font-size: 34px
+      font-size: 2.125em
       color: $black
+  +desktop
+    font-size: 0.834em
+    line-height: 2.6em
 
 .cards
   padding: 0
@@ -37,12 +41,14 @@ header
   display: flex
   justify-content: center
   flex-wrap: wrap
+  +desktop
+    font-size: 0.84em
 
 .card
-  margin: 1.5rem
-  +cardSize(15.9375rem)
+  margin: 2em
+  +cardSize(15.9375em)
   +neumorphicShadow
-  border-radius: 2rem
+  border-radius: 2em
   text-align: center
   .color-display
     margin-top: 1.875em
