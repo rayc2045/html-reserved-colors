@@ -1,0 +1,19 @@
+@mixin cardSize($w)
+  width: $w
+  height: $w / 255 * 360
+  
+@mixin round($w)
+  width: $w
+  height: $w
+  border-radius: 50%
+
+@mixin neumorphicShadow
+  box-shadow: -10px -10px 30px white, 4px 4px 30px silver
+  
+@mixin iPad
+  @media screen and (min-width: 768px)
+    @content
+  
+@mixin desktop
+  @media screen and (min-width: 1920px)
+    @content

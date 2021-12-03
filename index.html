@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Reserved Color</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/39514595?s=32">
+    <!-- Font: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/assets/styles/style.css">
+  </head>
+  <body
+    class="grid-center"
+    @mounted="store.loadColorData"
+    @contextmenu.prevent
+    @selectstart.prevent
+    @dragstart.prevent
+  >
+    <header>
+      <h1 class="title uppercase">COLOR NAMES</h1>
+      <p class="description">
+        Modern browsers support 140 named colors. Use them by name, Hex color code or RGB value.
+      </p>
+    </header>
+
+    <ul class="cards">
+      <li class="card" v-for="color in store.colors" :key="color.name">
+        <div
+          class="color-display pointer"
+          :style="`background-color: ${color.hex};`"
+          @click="store.copyCode(color, 'name')"
+        ></div>
+        <h1
+          class="pointer"
+          @click="store.copyCode(color, 'name')"
+        >
+          {{ color.name }}
+        </h1>
+        <div class="hex-section pointer" @click="store.copyCode(color, 'hex')">
+          <div class="title uppercase">HEX CODE</div>
+          <div class="hex-value">{{ color.hex }}</div>
+        </div>
+        <div class="rgb-section pointer" @click="store.copyCode(color, 'rgb')">
+          <div class="title uppercase">RGB VALUE</div>
+          <div class="rgb-value">{{ color.rgb }}</div>
+        </div>
+      </li>
+    </ul>
+
+    <script type="module">
+      import { createApp, reactive } from 'https://unpkg.com/petite-vue?module';
+
+      const store = reactive({
+        colors: [],
+        async loadColorData() {
+          const data = await fetch('./src/api/colors.json');
+          this.colors = await data.json();
+          console.log(`${this.colors.length} colors`);
+        },
+        copyCode(color, value) {
+          if (value === 'name')
+            return navigator.clipboard.writeText(
+              color.name
+                .split(' ')
+                .map(text => text.toLowerCase())
+                .join('')
+            );
+          navigator.clipboard.writeText(color[value]);
+        }
+      });
+
+      createApp({ store }).mount('body');
+    </script>
+  </body>
+</html>

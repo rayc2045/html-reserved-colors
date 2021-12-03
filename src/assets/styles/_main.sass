@@ -1,0 +1,51 @@
+.grid-center
+  display: grid
+  place-items: center
+
+.uppercase
+  text-transform: uppercase
+
+.pointer
+  cursor: pointer
+  
+header
+  width: 95%
+  
+.title
+  font-size: 0.875rem
+  color: silver
+
+.description
+  margin: 0
+  font-size: 2.125rem
+  font-weight: 500
+
+.cards
+  padding: 0
+  list-style: none
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+
+.card
+  margin: 1.5rem
+  +cardSize(15.9375rem)
+  +neumorphicShadow
+  border-radius: 2rem
+  text-align: center
+  .color-display
+    margin-top: 1.875em
+    +round(8.5em)
+    +neumorphicShadow
+    display: inline-block
+  h1
+    opacity: 80%
+    font-size: 1.75em
+  .hex-section, .rgb-section
+    margin-bottom: 1em
+    opacity: 80%
+    font-size: 0.875em
+  .title
+    font-size: 0.875em
+  .hex-value, .rgb-value
+    font-size: 1.25em
