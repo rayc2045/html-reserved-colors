@@ -15,7 +15,7 @@
   <body
     class="grid-center"
     @mounted="store.loadColorData"
-    @contextmenu.prevent
+    @contextmenu.prevent="scrollTo(0, 0)"
     @selectstart.prevent
     @dragstart.prevent
   >
@@ -35,7 +35,12 @@
         ></div>
         <h1
           class="pointer"
-          :style="`${color.name.length >= 17 ? 'font-size: 1.45em' : color.name.length >= 15 ? 'font-size: 1.6em': ''}`"
+          :style="`${
+            color.name.length >= 19 ? 'font-size: 1.45em; margin: 0.5em;' :
+            color.name.length >= 17 ? 'font-size: 1.45em; margin: 0.7em;' :
+            color.name.length >= 15 ? 'font-size: 1.6em; margin: 0.7em;' :
+            ''
+          }`"
           @click="store.copyCode(color, 'name')"
         >
           {{ color.name }}
@@ -73,7 +78,7 @@
         }
       });
 
-      createApp({ store }).mount('body');
+      createApp({ store }).mount();
     </script>
   </body>
 </html>
