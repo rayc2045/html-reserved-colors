@@ -9,7 +9,7 @@
     <!-- Font: Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/assets/styles/style.css">
   </head>
   <body
@@ -17,7 +17,8 @@
     v-cloak
     @mounted="loadColorData"
     @mousedown.once="audioCatch([copySound], 3)"
-    @contextmenu.prevent="scrollTo(0, 0)"
+    @dblclick="scrollTo(0, 0)"
+    @contextmenu.prevent
     @selectstart.prevent
     @dragstart.prevent
   >
