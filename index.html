@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./src/assets/styles/style.css">
+    <link rel="stylesheet" href="/src/assets/styles/style.css">
   </head>
   <body
     class="grid-center"
@@ -64,9 +64,9 @@
 
       createApp({
         colors: [],
-        copySound: new Audio('./src/assets/audio/modern-technology-select.wav'),
+        copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async loadColorData() {
-          const data = await fetch('./src/api/colors.json');
+          const data = await fetch('/src/api/colors.json');
           this.colors = await data.json();
           console.log(`${this.colors.length} colors`);
         },
