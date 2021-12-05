@@ -8,7 +8,7 @@
 雖然知道可以透過 HTML 的 red, white, black 等顏色單字而非色票 (color code) 來使用顏色，一直以來開發上都是在找好適合的顏色後，使用 Sass 將色票紀錄到變數再做使用，不過最近接觸到 [HTML Color Names](https://www.w3schools.com/tags/ref_colornames.asp) 才知道有將近 140 種網頁保留色，覺得似乎記住或是有系統的管理這些顏色有助於提升開發效率，因此決定做一個能夠幫助開發、同時也能作為美術作品來展示的 web app。色卡的外觀設計上，聯想到在 2020 年風靡一時的新擬物風格 Neumorphism (即 New Skeuomorphism)，對於使用亮暗陰影就能做出 3D 視覺效果而深受啟發，未曾嘗試過的好奇心驅使我完成了這次的作品。
 
 ### 外觀與互動設計
-- 以 [Neumorphism] 新擬物風格作為主視覺，呈現出比 [Pantone 色票](https://www.pantone.com/media/wysiwyg/pantone-color-swatches-palette-fashion-color-report-fall-2017-new-york.jpg) 更為討喜、耐看的色票卡片
+- 以 Neumorphism 新擬物風格作為主視覺，再加上可愛的圓角，呈現出比 [Pantone 色票](https://www.pantone.com/media/wysiwyg/pantone-color-swatches-palette-fashion-color-report-fall-2017-new-york.jpg) 更為討喜、耐看的色票卡片
 - 顏色名稱的字體大小和上下間距，依照長度做三段漸進調整
 - 封鎖不必要的文字選取、拖拉和右鍵點擊操作，並設計雙擊左鍵 (觸控設備點兩下) 直達頁首
 - 在鼠標碰觸到顏色名稱、HEX/RBG 碼時，更換鼠標為滴管圖案以提示可複製區域，同時也將預設和客製化鼠標改得稍大一些，且統一顏色為較淡一點的黑色 (`#222`)
