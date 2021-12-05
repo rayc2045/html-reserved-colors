@@ -9,12 +9,14 @@
     <!-- Font: Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/assets/styles/style.css">
   </head>
   <body
     class="grid-center"
-    @mounted="store.loadColorData"
+    v-cloak
+    @mounted="loadColorData"
+    @mousedown.once="audioCatch([copySound], 3)"
     @contextmenu.prevent="scrollTo(0, 0)"
     @selectstart.prevent
     @dragstart.prevent
@@ -27,11 +29,11 @@
     </header>
 
     <ul class="cards">
-      <li class="card" v-for="color in store.colors" :key="color.name">
+      <li class="card" v-for="color in colors" :key="color.name">
         <div
           class="color-display pointer"
           :style="`background-color: ${color.hex};`"
-          @click="store.copyCode(color, 'name')"
+          @click="copyCode(color, 'name')"
         ></div>
         <h1
           class="pointer"
@@ -41,15 +43,15 @@
             color.name.length >= 15 ? 'font-size: 1.6em; margin: 0.7em;' :
             ''
           }`"
-          @click="store.copyCode(color, 'name')"
+          @click="copyCode(color, 'name')"
         >
           {{ color.name }}
         </h1>
-        <div class="hex-section pointer" @click="store.copyCode(color, 'hex')">
+        <div class="hex-section pointer" @click="copyCode(color, 'hex')">
           <div class="title uppercase">HEX CODE</div>
           <div class="hex-value">{{ color.hex }}</div>
         </div>
-        <div class="rgb-section pointer" @click="store.copyCode(color, 'rgb')">
+        <div class="rgb-section pointer" @click="copyCode(color, 'rgb')">
           <div class="title uppercase">RGB VALUE</div>
           <div class="rgb-value">{{ color.rgb }}</div>
         </div>
@@ -57,16 +59,18 @@
     </ul>
 
     <script type="module">
-      import { createApp, reactive } from 'https://unpkg.com/petite-vue?module';
+      import { createApp } from 'https://unpkg.com/petite-vue?module';
 
-      const store = reactive({
+      createApp({
         colors: [],
+        copySound: new Audio('./src/assets/audio/modern-technology-select.wav'),
         async loadColorData() {
           const data = await fetch('./src/api/colors.json');
           this.colors = await data.json();
           console.log(`${this.colors.length} colors`);
         },
         copyCode(color, value) {
+          this.playAudio(this.copySound);
           if (value === 'name')
             return navigator.clipboard.writeText(
               color.name
@@ -75,10 +79,17 @@
                 .join('')
             );
           navigator.clipboard.writeText(color[value]);
+        },
+        playAudio(audio, volume = 1) {
+          audio.currentTime = 0;
+          audio.volume = volume;
+          audio.play();
+        },
+        audioCatch(audios, minute = 1) {
+          audios.forEach(audio => this.playAudio(audio, 0));
+          setTimeout(() => this.audioCatch(audios, minute), minute * 60_000);
         }
-      });
-
-      createApp({ store }).mount();
+      }).mount();
     </script>
   </body>
 </html>
