@@ -1,4 +1,4 @@
-# HTML Color Names
+# HTML Reserved Colors
 
 ![Cover](https://cdn.dribbble.com/users/3800131/screenshots/17000712/media/cf016f9c5cfe1e8e9ef7c8b005a5ade9.png)
 
