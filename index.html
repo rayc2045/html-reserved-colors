@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/src/assets/styles/style.css">
   </head>
   <body
-    class="grid-center hide"
+    class="grid-center"
     @mounted="init"
     @mousedown.once="audioCatch([copySound], 3)"
     @dblclick="scrollTo(0, 0)"
@@ -21,14 +21,20 @@
     @selectstart.prevent
     @dragstart.prevent
   >
-    <header :class="[{ animate: !isLoading }]">
+    <header
+      class="hide"
+      :class="[{ animate: !isLoading }]"
+    >
       <h1>Color Names</h1>
       <p>
         Modern browsers support 140 named colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
 
-    <ul :class="['cards', { animate: !isLoading }]">
+    <ul
+      class="cards hide"
+      :class="[{ animate: !isLoading }]"
+    >
       <li class="card" v-for="color in colors" :key="color.name">
         <div
           class="color-display pointer"
@@ -68,7 +74,7 @@
         async init() {
           await this.loadColorData();
           this.isLoading = false;
-          document.body.classList.remove('hide');
+          document.querySelectorAll('.hide').forEach(el => el.classList.remove('hide'));
         },
         async loadColorData() {
           const data = await fetch('/src/api/colors.json');
