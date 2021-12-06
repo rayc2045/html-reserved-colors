@@ -13,29 +13,22 @@
     <link rel="stylesheet" href="/src/assets/styles/style.css">
   </head>
   <body
-    class="grid-center"
-    v-cloak
-    @mounted="loadColorData"
+    class="grid-center hide"
+    @mounted="init"
     @mousedown.once="audioCatch([copySound], 3)"
     @dblclick="scrollTo(0, 0)"
     @contextmenu.prevent
     @selectstart.prevent
     @dragstart.prevent
   >
-    <header
-      v-if="!isLoading"
-      :class="[{ animate: !isLoading }]"
-    >
+    <header :class="[{ animate: !isLoading }]">
       <h1>Color Names</h1>
       <p>
         Modern browsers support 140 named colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
 
-    <ul
-      v-if="!isLoading"
-      :class="['cards', { animate: !isLoading }]"
-    >
+    <ul :class="['cards', { animate: !isLoading }]">
       <li class="card" v-for="color in colors" :key="color.name">
         <div
           class="color-display pointer"
@@ -72,11 +65,15 @@
         isLoading: true,
         colors: [],
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
+        async init() {
+          await this.loadColorData();
+          this.isLoading = false;
+          document.body.classList.remove('hide');
+        },
         async loadColorData() {
           const data = await fetch('/src/api/colors.json');
           this.colors = await data.json();
           console.log(`${this.colors.length} colors`);
-          this.isLoading = false;
         },
         copyCode(color, value) {
           this.playAudio(this.copySound);
