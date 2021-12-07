@@ -41,7 +41,7 @@
     <header :class="[{ animate: !isLoading }]">
       <h1>Color Names</h1>
       <p>
-        Modern browsers support 140 named colors. Use them by name, Hex color code or RGB value.
+        Modern browsers support {{ colors.length === 141 ? 141 : ''}} named colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
 
