@@ -84,11 +84,9 @@
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async init() {
           const { colors } = this.getParamsByUrl(window.location.href);
-          colors
-            ? await this.loadColorData(colors.split(' '))
-            : await this.loadColorData();
+          await this.loadColorData(colors ? colors.split(' ') : []);
           this.isLoading = false;
-          console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
+          // console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
         },
         getParamsByUrl(url) {
           const urlSearch = url.split('?')[1];
@@ -115,7 +113,9 @@
         copyColorCode(color, value) {
           this.playAudio(this.copySound);
           if (value === 'name')
-            return navigator.clipboard.writeText(this.getMinifiedColorName(color.name));
+            return navigator.clipboard.writeText(
+              this.getMinifiedColorName(color.name)
+            );
           navigator.clipboard.writeText(color[value]);
         },
         getMinifiedColorName(colorName) {
