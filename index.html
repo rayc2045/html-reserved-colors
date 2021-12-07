@@ -50,7 +50,7 @@
         <div
           class="color-display pointer"
           :style="`background-color: ${color.hex};`"
-          @click="copyCode(color, 'name')"
+          @click="copyColorCode(color, 'name')"
         ></div>
         <h1
           class="pointer"
@@ -60,15 +60,15 @@
             color.name.length >= 15 ? 'font-size: 1.6em; margin: 0.7em;' :
             ''
           }`"
-          @click="copyCode(color, 'name')"
+          @click="copyColorCode(color, 'name')"
         >
           {{ color.name }}
         </h1>
-        <div class="hex-section pointer" @click="copyCode(color, 'hex')">
+        <div class="hex-section pointer" @click="copyColorCode(color, 'hex')">
           <div class="title uppercase">HEX CODE</div>
           <div class="hex-value">{{ color.hex }}</div>
         </div>
-        <div class="rgb-section pointer" @click="copyCode(color, 'rgb')">
+        <div class="rgb-section pointer" @click="copyColorCode(color, 'rgb')">
           <div class="title uppercase">RGB VALUE</div>
           <div class="rgb-value">{{ color.rgb }}</div>
         </div>
@@ -85,13 +85,21 @@
         async init() {
           await this.loadColorData();
           this.isLoading = false;
+          console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
         },
         async loadColorData() {
           const data = await fetch('/src/api/colors.json');
           this.colors = await data.json();
-          console.log(`${this.colors.length} colors`);
         },
-        copyCode(color, value) {
+        getRepeatedItem(arr) {
+          const set = new Set();
+          return arr.filter(item =>
+            set.has(JSON.stringify(item))
+              ? true
+              : (set.add(JSON.stringify(item)), false)
+          );
+        },
+        copyColorCode(color, value) {
           this.playAudio(this.copySound);
           if (value === 'name')
             return navigator.clipboard.writeText(
