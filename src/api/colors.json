@@ -15,6 +15,11 @@
     "rgb": "rgb(178, 34, 34)"
   },
   {
+    "name": "Dark Red",
+    "hex": "#8B0000",
+    "rgb": "rgb(139, 0, 0)"
+  },
+  {
     "name": "Indian Red",
     "hex": "#CD5C5C",
     "rgb": "rgb(205, 92, 92)"
