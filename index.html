@@ -83,13 +83,26 @@
         colors: [],
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async init() {
-          await this.loadColorData();
+          const { colors } = this.getParamsByUrl(window.location.href);
+          colors
+            ? await this.loadColorData(colors.split(' '))
+            : await this.loadColorData();
           this.isLoading = false;
           console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
         },
-        async loadColorData() {
-          const data = await fetch('/src/api/colors.json');
-          this.colors = await data.json();
+        getParamsByUrl(url) {
+          const urlSearch = url.split('?')[1];
+          const urlSearchParams = new URLSearchParams(urlSearch);
+          return Object.fromEntries(urlSearchParams.entries());
+        },
+        async loadColorData(queryColors = []) {
+          const res = await fetch('/src/api/colors.json');
+          const data = await res.json();
+          if (!queryColors.length) return this.colors = data;
+          this.colors = data.filter(color =>
+            queryColors.includes(this.getMinifiedColorName(color.name))
+          );
+          if (!this.colors.length) this.colors = data;
         },
         getRepeatedItem(arr) {
           const set = new Set();
@@ -102,13 +115,11 @@
         copyColorCode(color, value) {
           this.playAudio(this.copySound);
           if (value === 'name')
-            return navigator.clipboard.writeText(
-              color.name
-                .split(' ')
-                .map(text => text.toLowerCase())
-                .join('')
-            );
+            return navigator.clipboard.writeText(this.getMinifiedColorName(color.name));
           navigator.clipboard.writeText(color[value]);
+        },
+        getMinifiedColorName(colorName) {
+          return colorName.split(' ').map(text => text.toLowerCase()).join('');
         },
         playAudio(audio, volume = 1) {
           audio.currentTime = 0;
