@@ -13,7 +13,7 @@
 - 封鎖不必要的文字選取、拖拉和右鍵點擊操作，並設計雙擊左鍵 (觸控設備點兩下) 直達頁首
 - 在鼠標碰觸到顏色名稱、HEX/RBG 碼時，更換鼠標為滴管圖案以提示可複製區域，同時也將預設和客製化鼠標改得稍大一些，且統一顏色為較淡一點的黑色 (`#222`)
 - 點擊複製顏色名稱、HEX/RBG 碼時，加入複製成功的音效，提升使用體驗
-- 將網站設計為可在網址後加入 `colors` Query String 參數，實現方便的顏色分享功能 ([範例](https://color-names.netlify.app/?colors=darkorange+indianred+sandybrown+seagreen+darkseagreen+lightslategray))
+- 將網站設計為可在網址後加入 Query String 參數 `colors`，實現方便的顏色分享功能 ([範例](https://color-names.netlify.app/?colors=darkorange+indianred+sandybrown+seagreen+darkseagreen+lightslategray))
 
 ### 開發紀錄
 - 自製 [色彩資料 API](https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/src/api/colors.json)
