@@ -50,6 +50,7 @@
         <div
           class="color-display pointer"
           :style="`background-color: ${color.hex};`"
+          title="Click to copy color name"
           @click="copyColorCode(color, 'name')"
         ></div>
         <h1
@@ -60,15 +61,24 @@
             color.name.length >= 15 ? 'font-size: 1.6em; margin: 0.7em;' :
             ''
           }`"
+          title="Click to copy color name"
           @click="copyColorCode(color, 'name')"
         >
           {{ color.name }}
         </h1>
-        <div class="hex-section pointer" @click="copyColorCode(color, 'hex')">
+        <div
+          class="hex-section pointer"
+          title="Click to copy HEX code"
+          @click="copyColorCode(color, 'hex')"
+        >
           <div class="title uppercase">HEX CODE</div>
           <div class="hex-value">{{ color.hex }}</div>
         </div>
-        <div class="rgb-section pointer" @click="copyColorCode(color, 'rgb')">
+        <div
+          class="rgb-section pointer"
+          title="Click to copy RGB value"
+          @click="copyColorCode(color, 'rgb')"
+        >
           <div class="title uppercase">RGB VALUE</div>
           <div class="rgb-value">{{ color.rgb }}</div>
         </div>
