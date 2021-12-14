@@ -114,13 +114,16 @@
           return Object.fromEntries(urlSearchParams.entries());
         },
         async loadColorData(queryColors = []) {
-          const res = await fetch('/src/api/colors.json');
-          const data = await res.json();
+          const data = await this.getData('/src/api/colors.json');
           if (!queryColors.length) return this.colors = data;
           this.colors = data.filter(color =>
             queryColors.includes(this.getMinifiedColorName(color.name))
           );
           if (!this.colors.length) this.colors = data;
+        },
+        async getData(api) {
+          const res = await fetch(api);
+          return await res.json();
         },
         getRepeatedItem(arr) {
           const set = new Set();
