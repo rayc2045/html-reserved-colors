@@ -103,12 +103,12 @@
         colors: [],
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async init() {
-          const { colors } = this.getParamsByUrl(window.location.href);
+          const { colors } = this.getParamsByUrl();
           await this.loadColorData(colors ? colors.split(' ') : []);
           this.isLoading = false;
           // console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
         },
-        getParamsByUrl(url) {
+        getParamsByUrl(url = window.location.href) {
           const urlSearch = url.split('?')[1];
           const urlSearchParams = new URLSearchParams(urlSearch);
           return Object.fromEntries(urlSearchParams.entries());
