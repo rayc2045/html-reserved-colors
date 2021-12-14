@@ -85,6 +85,16 @@
       </li>
     </ul>
 
+    <div
+      v-if="isLoading"
+      class="v-cloak"
+      style="
+        position: fixed; left: 0; top: 0;
+        width: 100vw; height: 100vh;
+        background-color: #eee;
+      "
+    ></div>
+
     <script type="module">
       import { createApp } from '/src/assets/scripts/petite-vue.js';
 
