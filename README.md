@@ -1,6 +1,6 @@
 # HTML Reserved Colors
 
-![Cover](https://cdn.dribbble.com/users/3800131/screenshots/17000712/media/cf016f9c5cfe1e8e9ef7c8b005a5ade9.png)
+![Cover](https://cdn.dribbble.com/users/3800131/screenshots/17078957/___2021-12-05___10.44.52.png)
 
 [> HTML Reserved Colors](https://color-names.netlify.app/)
 
