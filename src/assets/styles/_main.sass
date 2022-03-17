@@ -3,30 +3,30 @@ header
   line-height: 1.625em
   opacity: 0
   &.animate
-    animation: headerSlideIn 0.75s, headerFadeIn 1s
+    animation: headerSlideIn .75s, headerFadeIn 1s
     animation-fill-mode: forwards
   h1
-    margin-top: 0.5em
+    margin-top: .5em
     font-size: 2.625em
     font-weight: 500
   p
     margin: 0
     font-size: 1.3125em
-    letter-spacing: 0.03125em
+    letter-spacing: .03125em
     color: gray
   +iPad
     line-height: 2.6875rem
     h1
       margin: 0
-      font-size: 0.875em
-      letter-spacing: 0.1em
+      font-size: .875em
+      letter-spacing: .1em
       text-transform: uppercase
       color: silver
     p
       font-size: 2.125em
       color: $black
   +desktop
-    font-size: 0.834em
+    font-size: .834em
     line-height: 2.6em
 
 .cards
@@ -38,7 +38,7 @@ header
     animation: cardsSlideIn 1s, cardsFadeIn 1s
     animation-fill-mode: forwards
   +desktop
-    font-size: 0.84em
+    font-size: .84em
 
 .card
   margin: 2em
@@ -53,11 +53,16 @@ header
     display: inline-block
   h1
     font-size: 1.75em
+  .eth
+    padding: 0 .25em .25em .12em
+    position: absolute
+    width: .65rem
+    opacity: .75
   .hex-section, .rgb-section
     margin-bottom: 1em
-    font-size: 0.875em
+    font-size: .875em
   .title
-    font-size: 0.875em
+    font-size: .875em
     color: silver
   .hex-value, .rgb-value
     font-size: 1.25em
