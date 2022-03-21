@@ -67,7 +67,7 @@
           {{ color.name }}
           <a
             title="Go to NFT page"
-            :href="color.url"
+            :href="color.url[marketplaces[marketIndex]]"
             target="_blank"
             rel="noreferrer noopener"
             onclick="event.stopPropagation()"
@@ -95,6 +95,15 @@
     </ul>
 
     <div
+      v-if="marketplaces.length > 1"
+      :class="['market-place', { animate: !isLoading }]"
+      title="Click to change the market place"
+      @click="changeCurrentMarketIndex"
+    >
+      {{ marketplaces[marketIndex] }}
+    </div>
+
+    <div
       v-if="isLoading"
       class="v-cloak"
       style="
@@ -109,6 +118,8 @@
 
       createApp({
         isLoading: true,
+        marketplaces: ['OpenSea'],
+        marketIndex: 0,
         colors: [],
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async init() {
@@ -161,6 +172,11 @@
         audioCatch(audios, minute = 1) {
           audios.forEach(audio => this.playAudio(audio, 0));
           setTimeout(() => this.audioCatch(audios, minute), minute * 60_000);
+        },
+        changeCurrentMarketIndex() {
+          if (this.marketIndex === this.marketplaces.length - 1)
+            return this.marketIndex = 0;
+          this.marketIndex++;
         }
       }).mount();
     </script>
