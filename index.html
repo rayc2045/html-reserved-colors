@@ -44,6 +44,18 @@
         Modern browsers support {{ colors.length === 141 ? 141 : ''}} named colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
+    <p
+      v-if="marketplaces.length > 1"
+      :class="['marketplace', { animate: !isLoading }]"
+    >
+      Current marketplace:&nbsp;
+      <span
+        @click="changeCurrentMarketIndex"
+        title="Click to change the market place"
+      >
+        {{ marketplaces[marketIndex] }}
+      </span>
+    </p>
 
     <ul :class="['cards', { animate: !isLoading }]">
       <li class="card" v-for="color in colors" :key="color.name">
@@ -93,15 +105,6 @@
         </div>
       </li>
     </ul>
-
-    <div
-      v-if="marketplaces.length > 1"
-      :class="['market-place', { animate: !isLoading }]"
-      title="Click to change the market place"
-      @click="changeCurrentMarketIndex"
-    >
-      {{ marketplaces[marketIndex] }}
-    </div>
 
     <div
       v-if="isLoading"
