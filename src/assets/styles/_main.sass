@@ -41,6 +41,10 @@ header
     cursor: pointer
     border: .15em solid
     border-radius: 1.5em
+    &::after
+      content: ">"
+      display: inline-block
+      transform: rotate(90deg)
 
 .cards
   display: flex
