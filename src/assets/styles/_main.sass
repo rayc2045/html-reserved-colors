@@ -39,7 +39,8 @@ header
   width: 100%
   opacity: 0
   color: gray
-  background-color: rgba($white, 0.95)
+  background-color: rgba($white, 0.8)
+  backdrop-filter: blur(10px)
   &.animate
     animation: headerSlideIn .75s, headerFadeIn 1s
     animation-fill-mode: forwards
@@ -54,8 +55,6 @@ header
       content: ">"
       display: inline-block
       transform: rotate(90deg)
-    &:hover
-      background-color: rgba(black, .02)
 
 .cards
   display: flex
