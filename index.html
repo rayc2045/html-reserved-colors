@@ -121,13 +121,14 @@
 
       createApp({
         isLoading: true,
-        marketplaces: ['OpenSea'],
+        marketplaces: [],
         marketIndex: 0,
         colors: [],
         copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
         async init() {
           const { colors } = this.getParamsByUrl();
           await this.loadColorData(colors ? colors.split(' ') : []);
+          this.marketplaces = Object.keys(this.colors[0].url);
           this.isLoading = false;
           // console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
         },
