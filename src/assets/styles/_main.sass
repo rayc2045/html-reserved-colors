@@ -30,8 +30,14 @@ header
     line-height: 2.6em
 
 .marketplace
+  position: sticky
+  top: 0
+  z-index: 9999
+  margin: 0
+  padding: 1.5rem 0
   width: 95%
   color: gray
+  background-color: rgba($white, 0.95)
   &.animate
     animation: headerSlideIn .75s, headerFadeIn 1s
     animation-fill-mode: forwards
