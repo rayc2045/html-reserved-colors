@@ -1,4 +1,4 @@
-# HTML Reserved Colors
+# HTML Reserved Colors｜可用於設計和幫助開發的色票複製工具
 
 ![Cover](https://cdn.dribbble.com/users/3800131/screenshots/17078957/___2021-12-05___10.44.52.png)
 
