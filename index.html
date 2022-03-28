@@ -124,7 +124,7 @@
         marketplaces: [],
         marketIndex: 0,
         colors: [],
-        copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
+        copySound: new Audio('/src/assets/audios/modern-technology-select.wav'),
         async init() {
           const { colors } = this.getParamsByUrl();
           await this.loadColorData(colors ? colors.split(' ') : []);
