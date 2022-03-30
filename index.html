@@ -14,19 +14,19 @@
     <meta property="og:url" content="https://color-names.netlify.app/">
     <meta property="og:title" content="HTML Color Names">
     <meta property="og:description" content="Use HTML reserved colors by name, Hex color code or RGB value.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/src/assets/images/cover.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://color-names.netlify.app/">
     <meta property="twitter:title" content="HTML Color Names">
     <meta property="twitter:description" content="Use HTML reserved colors by name, Hex color code or RGB value.">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/src/assets/images/cover.png">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png">
     <!-- Font Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
     <!-- Style -->
-    <link rel="stylesheet" href="/src/assets/styles/style.css">
+    <link rel="stylesheet" href="/src/styles/style.css">
   </head>
   <body
     class="grid-center"
@@ -84,7 +84,7 @@
             rel="noreferrer noopener"
             onclick="event.stopPropagation()"
           >
-            <img class="eth" src="/src/assets/images/ETH.svg" alt="">
+            <img class="eth" src="/assets/images/ETH.svg" alt="">
           </a>
         </h1>
         <div
@@ -117,14 +117,14 @@
     ></div>
 
     <script type="module">
-      import { createApp } from '/src/assets/scripts/petite-vue.js';
+      import { createApp } from '/src/scripts/petite-vue.js';
 
       createApp({
         isLoading: true,
         marketplaces: [],
         marketIndex: 0,
         colors: [],
-        copySound: new Audio('/src/assets/audio/modern-technology-select.wav'),
+        copySound: new Audio('/assets/audios/modern-technology-select.wav'),
         async init() {
           const { colors } = this.getParamsByUrl();
           await this.loadColorData(colors ? colors.split(' ') : []);
@@ -138,7 +138,7 @@
           return Object.fromEntries(urlSearchParams.entries());
         },
         async loadColorData(queryColors = []) {
-          const data = await this.getData('/src/api/colors.json');
+          const data = await this.getData('/src/data/colors.json');
           if (!queryColors.length) return this.colors = data;
           this.colors = data.filter(color =>
             queryColors.includes(this.getMinifiedColorName(color.name))
