@@ -118,6 +118,9 @@
 
     <script type="module">
       import { createApp } from '/src/scripts/petite-vue.js';
+      import {
+        getParamsByUrl, getData, copyText, playAudio, audioCatch
+      } from '/src/scripts/utils.js';
 
       createApp({
         isLoading: true,
@@ -126,56 +129,31 @@
         colors: [],
         copySound: new Audio('/assets/audios/modern-technology-select.wav'),
         async init() {
-          const { colors } = this.getParamsByUrl();
+          const { colors } = getParamsByUrl();
           await this.loadColorData(colors ? colors.split(' ') : []);
           this.marketplaces = Object.keys(this.colors[0].url);
           this.isLoading = false;
-          // console.log(`${this.colors.length} colors, ${this.getRepeatedItem(this.colors).length} repeated`);
-        },
-        getParamsByUrl(url = window.location.href) {
-          const urlSearch = url.split('?')[1];
-          const urlSearchParams = new URLSearchParams(urlSearch);
-          return Object.fromEntries(urlSearchParams.entries());
+          // console.log(`${this.colors.length} colors, ${getRepeatedItem(this.colors).length} repeated`);
         },
         async loadColorData(queryColors = []) {
-          const data = await this.getData('/src/data/colors.json');
+          const data = await getData('/src/data/colors.json');
           if (!queryColors.length) return this.colors = data;
           this.colors = data.filter(color =>
             queryColors.includes(this.getMinifiedColorName(color.name))
           );
           if (!this.colors.length) this.colors = data;
         },
-        async getData(api) {
-          const res = await fetch(api);
-          return await res.json();
-        },
-        getRepeatedItem(arr) {
-          const set = new Set();
-          return arr.filter(item =>
-            set.has(JSON.stringify(item))
-              ? true
-              : (set.add(JSON.stringify(item)), false)
-          );
-        },
-        copyColorCode(color, value) {
-          this.playAudio(this.copySound);
-          if (value === 'name')
-            return navigator.clipboard.writeText(
-              this.getMinifiedColorName(color.name)
-            );
-          navigator.clipboard.writeText(color[value]);
+        copyColorCode(color, key) {
+          playAudio(this.copySound);
+          if (key === 'name')
+            return copyText(this.getMinifiedColorName(color.name));
+          copyText(color[key]);
         },
         getMinifiedColorName(colorName) {
-          return colorName.split(' ').map(text => text.toLowerCase()).join('');
-        },
-        playAudio(audio, volume = 1) {
-          audio.currentTime = 0;
-          audio.volume = volume;
-          audio.play();
+          return colorName.toLowerCase().replaceAll(' ', '');
         },
         audioCatch(audios, minute = 1) {
-          audios.forEach(audio => this.playAudio(audio, 0));
-          setTimeout(() => this.audioCatch(audios, minute), minute * 60_000);
+          audioCatch(audios, minute);
         },
         changeCurrentMarketIndex() {
           if (this.marketIndex === this.marketplaces.length - 1)
