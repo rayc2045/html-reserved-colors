@@ -18,6 +18,7 @@
 ### 開發紀錄
 - 自製 [色彩資料 API](https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/src/api/colors.json)
 - 使用相似於 [Preact](https://preactjs.com/) 的 micro-library [petite-vue](https://github.com/vuejs/petite-vue)，開發無需 build
+- 將通用型程式碼與專案用程式碼進行拆分，需要時再模組化引入做使用 (module import)
 - 排版採手機優先 (mobile first)，並使用 Flexbox 讓色票卡片達到自適應效果，以及使用 `rem` 和 `em` 作為元件單位，達成在任何尺寸裝置上 (120 吋超大螢幕也 ok！)，保持一致絕佳比例的響應式設計
 - 將網頁元素預設為不可見 (`opacity: 0`)，等資料掛載後再配合動畫做淡入 (fade in)，讓動畫的銜接更為順暢
 - 使用優雅的無聲定時播放音效方式來製造音檔緩存
