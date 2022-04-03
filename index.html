@@ -32,7 +32,7 @@
     class="grid-center"
     v-cloak
     @mounted="init"
-    @mousedown.once="audioCatch([copySound], 3)"
+    @mousedown.once="audiosCatch([copySound], 3)"
     @dblclick="scrollTo(0, 0)"
     @contextmenu.prevent
     @selectstart.prevent
@@ -119,7 +119,7 @@
     <script type="module">
       import { createApp } from '/src/scripts/petite-vue.js';
       import {
-        getParamsByUrl, getData, copyText, playAudio, audioCatch
+        getParamsByUrl, getData, copyText, playAudio, audiosCatch
       } from '/src/scripts/utils.js';
 
       createApp({
@@ -129,19 +129,19 @@
         colors: [],
         copySound: new Audio('/assets/audios/modern-technology-select.wav'),
         async init() {
-          const { colors } = getParamsByUrl();
-          await this.loadColorData(colors ? colors.split(' ') : []);
+          const colorQueries = getParamsByUrl().colors ?? [];
+          await this.loadColorData(colorQueries);
           this.marketplaces = Object.keys(this.colors[0].url);
           this.isLoading = false;
           // console.log(`${this.colors.length} colors, ${getRepeatedItem(this.colors).length} repeated`);
         },
-        async loadColorData(queryColors = []) {
+        async loadColorData(queries) {
           const data = await getData('/src/data/colors.json');
-          if (!queryColors.length) return this.colors = data;
-          this.colors = data.filter(color =>
-            queryColors.includes(this.getMinifiedColorName(color.name))
-          );
-          if (!this.colors.length) this.colors = data;
+          if (!queries.length) return this.colors = data;
+          const matches = data.filter(color =>
+            queries.includes(this.getMinifiedColorName(color.name)));
+          if (!matches.length) return this.colors = data;
+          this.colors = matches;
         },
         copyColorCode(color, key) {
           playAudio(this.copySound);
@@ -152,8 +152,8 @@
         getMinifiedColorName(colorName) {
           return colorName.toLowerCase().replaceAll(' ', '');
         },
-        audioCatch(audios, minute = 1) {
-          audioCatch(audios, minute);
+        audiosCatch(audios, minute = 1) {
+          audiosCatch(audios, minute);
         },
         changeCurrentMarketIndex() {
           if (this.marketIndex === this.marketplaces.length - 1)
