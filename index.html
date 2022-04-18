@@ -27,6 +27,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
     <!-- Style -->
     <link rel="stylesheet" href="/src/styles/style.css">
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
   </head>
   <body
     class="grid-center"
@@ -105,16 +110,6 @@
         </div>
       </li>
     </ul>
-
-    <div
-      v-if="isLoading"
-      class="v-cloak"
-      style="
-        position: fixed; left: 0; top: 0;
-        width: 100vw; height: 100vh;
-        background-color: #eee;
-      "
-    ></div>
 
     <script type="module">
       import { createApp } from '/src/scripts/petite-vue.js';
