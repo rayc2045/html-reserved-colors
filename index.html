@@ -114,7 +114,7 @@
     <script type="module">
       import { createApp } from '/src/scripts/petite-vue.js';
       import {
-        getParamsByUrl, getData, copyText, playAudio, audiosCatch
+        getQueryParams, getData, copyText, playAudio, audiosCatch
       } from '/src/scripts/utils.js';
 
       createApp({
@@ -124,7 +124,7 @@
         colors: [],
         copySound: new Audio('/assets/audios/modern-technology-select.wav'),
         async init() {
-          const colorQueries = getParamsByUrl().colors ?? [];
+          const colorQueries = getQueryParams().colors?.split(' ') ?? [];
           await this.loadColorData(colorQueries);
           this.marketplaces = Object.keys(this.colors[0].url);
           this.isLoading = false;
