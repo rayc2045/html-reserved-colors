@@ -57,9 +57,13 @@ header
       transform: rotate(90deg)
 
 .cards
-  display: flex
+  // display: flex
+  // justify-content: center
+  // flex-wrap: wrap
+  width: 100%
+  display: grid
   justify-content: center
-  flex-wrap: wrap
+  grid-template-columns: repeat(auto-fit, 20em)
   opacity: 0
   &.animate
     animation: cardsSlideIn 1s, cardsFadeIn 1s
