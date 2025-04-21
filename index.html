@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,27 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
     <title>HTML Color Names</title>
-    <meta name="title" content="HTML Color Names">
-    <meta name="description" content="Use HTML reserved colors by name, Hex color code or RGB value.">
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/39514595?s=32">
+    <meta name="title" content="HTML Color Names" />
+    <meta
+      name="description"
+      content="Use HTML reserved colors by name, Hex color code or RGB value."
+    />
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/39514595?s=32"
+    />
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://color-names.netlify.app/">
-    <meta property="og:title" content="HTML Color Names">
-    <meta property="og:description" content="Use HTML reserved colors by name, Hex color code or RGB value.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://color-names.netlify.app/" />
+    <meta property="og:title" content="HTML Color Names" />
+    <meta
+      property="og:description"
+      content="Use HTML reserved colors by name, Hex color code or RGB value."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png"
+    />
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://color-names.netlify.app/">
-    <meta property="twitter:title" content="HTML Color Names">
-    <meta property="twitter:description" content="Use HTML reserved colors by name, Hex color code or RGB value.">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://color-names.netlify.app/" />
+    <meta property="twitter:title" content="HTML Color Names" />
+    <meta
+      property="twitter:description"
+      content="Use HTML reserved colors by name, Hex color code or RGB value."
+    />
+    <meta
+      property="twitter:image"
+      content="https://raw.githubusercontent.com/rayc2045/html-reserved-colors/main/assets/images/cover.png"
+    />
     <!-- Font Rubik -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Style -->
-    <link rel="stylesheet" href="/src/styles/style.css">
+    <link rel="stylesheet" href="/src/styles/style.css" />
     <style>
       [v-cloak] {
         display: none;
@@ -46,7 +67,8 @@
     <header :class="[{ animate: !isLoading }]">
       <h1>Color Names</h1>
       <p>
-        Modern browsers support {{ colors.length === 141 ? 141 : ''}} named colors. Use them by name, Hex color code or RGB value.
+        Modern browsers support {{ colors.length === 141 ? 141 : ''}} named
+        colors. Use them by name, Hex color code or RGB value.
       </p>
     </header>
     <p
@@ -83,13 +105,14 @@
         >
           {{ color.name }}
           <a
+            v-if="marketplaces.length"
             title="Go to NFT page"
             :href="color.url[marketplaces[marketIndex]]"
             target="_blank"
             rel="noreferrer noopener"
             onclick="event.stopPropagation()"
           >
-            <img class="eth" src="/assets/images/ETH.svg" alt="">
+            <img class="eth" src="/assets/images/ETH.svg" alt="" />
           </a>
         </h1>
         <div
@@ -112,49 +135,57 @@
     </ul>
 
     <script type="module">
-      import { createApp } from '/src/scripts/petite-vue.js';
+      import { createApp } from "/src/scripts/petite-vue.js";
       import {
-        getQueryParams, getData, copyText, playAudio, audiosCatch
-      } from '/src/scripts/utils.js';
+        getQueryParams,
+        getData,
+        copyText,
+        playAudio,
+        audiosCatch,
+      } from "/src/scripts/utils.js";
 
       createApp({
         isLoading: true,
         marketplaces: [],
         marketIndex: 0,
         colors: [],
-        copySound: new Audio('/assets/audios/modern-technology-select.wav'),
+        copySound: new Audio("/assets/audios/modern-technology-select.wav"),
         async init() {
-          const colorQueries = getQueryParams().colors?.split(' ') ?? [];
-          await this.loadColorData(colorQueries);
-          this.marketplaces = Object.keys(this.colors[0].url);
+          const colorQueries = getQueryParams().colors?.split(" ") ?? [];
+          const params = getQueryParams(),
+            colors = params.colors?.split(" ") ?? [],
+            isNFT = "NFT" in params;
+          await this.loadColorData(colors);
+          if (isNFT) this.marketplaces = Object.keys(this.colors[0].url);
           this.isLoading = false;
           // console.log(`${this.colors.length} colors, ${getRepeatedItem(this.colors).length} repeated`);
         },
         async loadColorData(queries) {
-          const data = await getData('/src/data/colors.json');
-          if (!queries.length) return this.colors = data;
-          const matches = data.filter(color =>
-            queries.includes(this.getMinifiedColorName(color.name)));
-          if (!matches.length) return this.colors = data;
+          const data = await getData("/src/data/colors.json");
+          if (!queries.length) return (this.colors = data);
+          const matches = data.filter((color) =>
+            queries.includes(this.getMinifiedColorName(color.name)),
+          );
+          if (!matches.length) return (this.colors = data);
           this.colors = matches;
         },
         copyColorCode(color, key) {
           playAudio(this.copySound);
-          if (key === 'name')
+          if (key === "name")
             return copyText(this.getMinifiedColorName(color.name));
           copyText(color[key]);
         },
         getMinifiedColorName(colorName) {
-          return colorName.toLowerCase().replaceAll(' ', '');
+          return colorName.toLowerCase().replaceAll(" ", "");
         },
         audiosCatch(audios, minute = 1) {
           audiosCatch(audios, minute);
         },
         changeCurrentMarketIndex() {
           if (this.marketIndex === this.marketplaces.length - 1)
-            return this.marketIndex = 0;
+            return (this.marketIndex = 0);
           this.marketIndex++;
-        }
+        },
       }).mount();
     </script>
   </body>
